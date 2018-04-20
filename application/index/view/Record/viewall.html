@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>借书记录</title>
+</head>
+<body>
+	{if condition="$authority == ''"}
+		-----游客模式-----<br>
+		<a href="/user">登录</a>&nbsp;&nbsp;<a href="/user/register">注册</a>
+		<h1>权限不足！</h1>
+	{else/}
+		{if condition="$authority == 1 "}
+			用户名：{$username}<br>
+			<h4><a href="/user/logout">注销</a></h4>
+			-----管理员模式-----<br>
+		{else/}
+			用户名：{$username}<br>
+			权限不足！
+		{/if}
+		<h2>借书记录</h2>
+		<table width="70%">
+			<tr>
+				<th>用户名</th>
+				<th>电话号码</th>
+				<th>书名</th>
+				<th>书籍编号</th>
+				<th>借出时间</th>
+				<th>归还时间</th>
+				<th>最晚归还时间</th>
+			</tr>
+			
+			{volist name="result" id="all"}
+			<tr align="center">
+				<td>{$all->user->username}</td>
+				<td>{$all->user->phone}</td>
+				<td>{$all->book->bookname}</td>
+				<td>{$all.chucang_id}</td>
+				<td>{$all.date}</td>
+				<td>
+					{if condition="$all.redate != ''"}
+						{$all.redate}
+					{else/}
+						未还
+					{/if}
+				</td>
+				<td>{$all.lastdate}</td>
+			</tr>
+			{/volist}
+		</table>
+		<a href="/book">返回</a>
+	{/if}
+	
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>无借书记录</title>
+</head>
+<body>
+	{if condition="$authority == 1 "}
+		<h1>此人用户名：{$single.username}</h1>
+	{/if}
+	<h1>没借过书！</h1>
+	{if condition="$authority == 2"}
+		<a href="/book">返回</a>
+	{else/}
+		<a href="/records/view">返回</a>
+	{/if}
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>所有人</title>
+</head>
+<body>
+	{if condition="$authority == 1"}
+	{volist name="result" id="user"}
+	<h2><a href="/records/{$user.id}">{$user.username}</a><br></h2>
+	{/volist}
+	<h1><a href="/book">返回</a></h1>
+	{else/}
+	<h1>权限不足！</h1>
+	{/if}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>修改书籍信息</title>
+</head>
+<body>
+	{if condition="$authority == 1 "}
+	<form method="post" action="/books/editb">
+		书名：<input type="text" name="bookname" value="{$result.bookname}"><br>
+		作者：<input type="text" name="author" value="{$result.author}"><br>
+		<input type="hidden" name="id" value="{$result.id}">
+		<button type="submit">确认修改</button>
+	</form>
+	<a href="/book">返回</a>
+	{else/}
+	<h1>权限不足！</h1>
+	{/if}
+</body>
+</html>

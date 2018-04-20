@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>查询结果</title>
+</head>
+<body>
+	{if condition="$authority == 1"}
+	用户名：{$username}<br>
+	<h4><a href="/records/view">查看所有人借书记录</a></h4>
+	<h4><a href="/user/logout">注销</a></h4>
+	-----管理员模式-----<br>
+	{else/}
+	{if condition="$authority == '' "}
+	-----游客模式-----<br>
+	<a href="/user">登录</a>&nbsp;&nbsp;<a href="/user/register">注册</a>
+	{else/}
+	用户名：{$username}<br>
+	<h4><a href="/records/{$id}">我的借书记录</a></h4>
+	<h4><a href="/user/logout">注销</a></h4>
+	{/if}
+	{/if}
+	<h2>全部书籍</h2>
+	<form method="post" action="/books/query">
+		<h3>查询：<input type="text" name="query">&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit">查询</button></h3>
+	</form>
+	<table width="30%">
+		<tr>
+			<th>书名</th>
+			<th>作者</th>
+			<th>剩余数量</th>
+			{if condition="$authority != '' "}
+			<th>操作</th>
+			{/if}
+		</tr>
+		{volist name="result" id="book"}
+		<tr align="center">
+			<td>{$book.bookname}</td>
+			<td>{$book.author}</td>
+			<td>
+				{$book.num}
+			</td>
+			<td>
+				{if condition="$authority != '' "}
+				{if condition="$authority == 2 "}
+				<a href="/record/addrecord/{$id}/{$book.id}">借此书</a>
+				{else/}
+				<a href="/record/details/{$book.id}">查看详情</a>
+				{/if}
+				{/if}
+			</td>
+		</tr>
+		{/volist}
+	</table>
+	{if condition="$authority == 1 "}
+	<a href="/book/addbook">添加书籍</a><br>
+	{/if}
+	<a href="/book">返回</a>
+</body>
+</html>

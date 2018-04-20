@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>借书记录</title>
+</head>
+<body>
+	{if condition="$authority == ''"}
+		-----游客模式-----<br>
+		<a href="/user">登录</a>&nbsp;&nbsp;<a href="/user/register">注册</a>
+		<h1>权限不足！</h1>
+	{else/}
+		{if condition="$authority == 1 "}
+			用户名：{$username}<br>
+			<h4><a href="/user/logout">注销</a></h4>
+			-----管理员模式-----<br>
+		{else/}
+			用户名：{$username}<br>
+			<h4><a href="/user/logout">注销</a></h4>
+		{/if}
+		{if condition="$authority == 1 "}
+			<h1>此人用户名：{$single->user->username}</h1>
+			<h1>此人电话号码：{$single->user->phone}</h1>
+		{/if}
+		<h2>借书记录</h2>
+		<table width="60%">
+			<tr>
+				<th>书名</th>
+				<th>书籍编号</th>
+				<th>借出时间</th>
+				<th>归还时间</th>
+				<th>最晚归还时间</th>
+				{if condition="$authority == 2 "}
+				<th>操作</th>
+				{/if}
+			</tr>
+			
+			{volist name="result" id="all"}
+			<tr align="center">
+				<td>{$all->book->bookname}</td>
+				<td>{$all.chucang_id}</td>
+				<td>{$all.date}</td>
+				<td>
+					{if condition="$all.redate != ''"}
+						{$all.redate}
+					{else/}
+						未还
+					{/if}
+				</td>
+				<td>{$all.lastdate}</td>
+				{if condition="$authority == 2 "}
+					{if condition="$all.redate == ''"}
+					<td><form method="post" action="/record/rebook/{$all.id}/{$all.book_id}">
+						<input type="hidden" name="chucang_id" value="{$all.chucang_id}">
+						<button type="submit">归还</button>
+					</form></td>
+					{else/}
+					<td>已还</td>
+					{/if}
+				{/if}
+			</tr>
+			{/volist}
+		</table>
+		{if condition="$authority == 2"}
+			<a href="/book">返回</a>
+		{else/}
+			<a href="/records/view">返回</a>
+		{/if}
+	{/if}
+	
+</body>
+</html>

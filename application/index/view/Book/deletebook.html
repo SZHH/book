@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>删除书籍</title>
+</head>
+<body>
+	{if condition="$authority == 1 "}
+	<form method="post" action="/books/deleteb">
+		书名：{$result.bookname}<br>
+		作者：{$result.author}<br>
+		剩余数量：{$number}<br>
+		<input type="hidden" name="id" value="{$result.id}">
+		<input type="hidden" name="number" value="{$number}">
+		<button type="submit">确认</button>
+	</form>
+	<a href="/book">返回</a>
+	{else/}
+	<h1>权限不足！</h1>
+	{/if}
+</body>
+</html>

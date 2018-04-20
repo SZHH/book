@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>归还</title>
+</head>
+<body>
+	{if condition="$authority != '' "}
+	<form method="post" action="/record/reb">
+		书名：{$result.bookname}<br>
+        作者：{$result.author}<br>
+        <input type="hidden" name="book_id" value="{$result.id}">
+        <input type="hidden" name="id" value="{$id}">
+        <input type="hidden" name="chucang_id" value="{$chucang_id}">
+        <button type="submit">确认归还</button>
+	</form>
+	<a href="/records/{$Request.session.id}">返回</a>
+	{else/}
+	<h1>权限不足！</h1>
+	{/if}
+</body>
+</html>

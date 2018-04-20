@@ -1,0 +1,19 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>添加书籍</title>
+</head>
+<body>
+	{if condition="$authority == 1 "}
+	<form action="/book/addb" method="post">
+        书名：<input type="text" name="bookname"><br>
+        作者：<input type="text" name="author"><br>
+        数量：<input type="text" name="number"><br>
+        <button type="submit">确认添加</button>
+	</form>
+	<a href="/book">返回</a>
+	{else/}
+	<h1>权限不足！</h1>
+	{/if}
+</body>
+</html>
